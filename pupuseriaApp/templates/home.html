@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <!-- Contenido Principal -->
+    <main class="py-12 space-y-24">
+        <section class="py-xxl-4">
+            <div class="container mx-auto text-center">
+                <h1 class="text-5xl md:text-7xl font-bold text-red-800 font-gorditas">Bienvenido a El Buen Sabor</h1>
+                <p class="mt-2 text-lg text-gray-600">¡Descubre las pupusas más deliciosas de la región!</p>
+            </div>
+
+            <!-- Carrusel -->
+            <div id="main-carousel" class="relative w-full max-w-4xl mx-auto mt-6 overflow-hidden">
+                <div class="flex transition-transform duration-300 ease-in-out">
+                    <div class="w-full flex-shrink-0">
+                        <a href="#pedido" class="relative block">
+                            <img src="{% static 'images/pupusas.png' %}" alt="Pupusas Tradicionales" class="w-full h-64 object-cover rounded-lg">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
+                                <h2 class="text-2xl font-bold mb-2">¡Ordena tus pupusas tradicionales ahora!</h2>
+                                <p>Disfruta el sabor auténtico desde casa.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="w-full flex-shrink-0">
+                        <a href="https://www.instagram.com" target="_blank" class="relative block">
+                            <img src="{% static 'images/instagram.png' %}" alt="Síguenos en Instagram" class="w-full h-64 object-cover rounded-lg">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
+                                <h2 class="text-2xl font-bold mb-2">Síguenos en Instagram</h2>
+                                <p>No te pierdas nuestras ofertas y novedades.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="w-full flex-shrink-0">
+                        <a href="#menu" class="relative block">
+                            <img src="{% static 'images/menu.png' %}" alt="Explora nuestro menú" class="w-full h-64 object-cover rounded-lg">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
+                                <h2 class="text-2xl font-bold mb-2">Explora nuestro menú</h2>
+                                <p>Conoce todos nuestros sabores únicos.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2" id="prev-btn">
+                    <svg class="w-6 h-6 text-red-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2" id="next-btn">
+                    <svg class="w-6 h-6 text-red-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Información Section -->
+        <section class="container mx-auto px-4 hidden-section">
+            <div class="grid md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
+                <div class="rounded-2xl overflow-hidden shadow-xl">
+                    <img src=" {% static  'images/Pupuseria.png' %}" alt="Personas disfrutando pupusas" class="w-full h-64 object-cover">
+                </div>
+                <div class="space-y-4">
+                    <h2 class="text-4xl font-gorditas text-red-800">Conoce a la Pupusería el Buen Sabor</h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        Somos una pupusería tradicional comprometida con mantener el auténtico sabor salvadoreño. 
+                        Nuestras pupusas son preparadas a mano, utilizando ingredientes frescos y de la más alta calidad, 
+                        siguiendo recetas tradicionales que han pasado de generación en generación.
+                    </p>
+        
+                </div>
+            </div>
+        </section>
+
+        <!-- Ubicación Section -->
+        <section class="container mx-auto px-4 hidden-section">
+            <div class="grid md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
+                <div class="space-y-4 order-2 md:order-1">
+                    <div class="flex items-center gap-2">
+                        <div class="bg-blue-600 p-2 rounded-full">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-4xl font-gorditas text-red-800">Encuéntranos</h2>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed">
+                        Estamos ubicados en una zona céntrica y accesible. Visítanos y disfruta de la mejor experiencia 
+                        gastronómica salvadoreña en un ambiente acogedor y familiar.
+                    </p>
+                    <div class="space-y-2">
+                        <p class="font-semibold">Dirección:</p>
+                        <p class="text-gray-600">Calle Principal #123, Ciudad</p>
+                        <p class="font-semibold">Horario:</p>
+                        <p class="text-gray-600">Lunes a Domingo: 11:00 AM - 9:00 PM</p>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 rounded-2xl overflow-hidden shadow-xl">
+                    <div id="map" data-map class="w-full h-[300px]"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Carousel functionality
+        const carousel = document.querySelector('#main-carousel > div');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            carousel.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + 3) % 3;
+            showSlide(currentSlide);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % 3;
+            showSlide(currentSlide);
+        });
+
+        // Auto-rotate carousel
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % 3;
+            showSlide(currentSlide);
+        }, 5000);
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible-section');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.hidden-section').forEach((section) => {
+            observer.observe(section);
+        });
+
+
+        function initMap() {
+            if (!window.google) return; // Guard clause if Google Maps isn't loaded yet
+    
+            const location = { 
+                lat: 13.982278, 
+                lng: -89.559167 
+            };
+            
+            const mapElement = document.getElementById('map');
+            if (!mapElement) return;
+
+            const map = new google.maps.Map(mapElement, {
+                zoom: 15,
+                center: location,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                streetViewControl: false,
+                styles: [
+                    {
+                        "featureType": "poi",
+                        "elementType": "labels",
+                        "stylers": [{ "visibility": "off" }]
+                    }
+                ]
+            });
+
+            new google.maps.Marker({
+                position: location,
+                map: map,
+                title: 'El Buen Sabor'
+            });
+        }
+
+        // In case the script loads after the DOM
+        if (window.google && window.google.maps) {
+            initMap();
+        }
+    </script>
+</body>
+</html>
+
+{% endblock %}
+

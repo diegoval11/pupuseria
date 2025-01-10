@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <title>El Buen Sabor | Pupusería</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&family=Baloo+2&display=swap" rel="stylesheet">
+    <!-- Google Maps API -->
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmRm1SsQ7qjpn9XPQNhzazZLd2mgKwGEM&callback=initMap">
+    </script>
+    <script src="{% static 'js/tailwind-conf.js' %}"> </script>
+
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
+</head>
+
+<body class="bg-gray-100 font-baloo">
+    <!-- Navbar -->
+    <nav class="w-full bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="{% static 'images/logo.png' %}" alt="Logo Pupusería" class="w-12 h-12 rounded-full border-2 border-yellow-500">
+            </a>
+            <span class="text-left font-gorditas text-red-800">"El buen sabor está en los ingredientes."</span>
+            <div class="flex items-center space-x-4">
+                <a href="{% url 'pedido' %}" class="order-here text-white font-bold px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">¡Ordena Aquí!</a>
+                <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
+                    <li><a href="#menu" class="hover:text-red-500">Menú</a></li>
+                    <li><a href="#contact" class="hover:text-red-500">Contáctanos</a></li>
+                </ul>
+                <button id="menu-btn" class="md:hidden focus:outline-none">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-100">
+            <ul class="flex flex-col space-y-4 text-center py-4">
+                <li><a href="#menu" class="hover:text-red-500">Menú</a></li>
+                <li><a href="#contact" class="hover:text-red-500">Contáctanos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    {% block content %} {% endblock %}
+
+
+
+     <!-- Footer -->
+     <footer class="bg-red-800 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; {% now "Y" %} El Buen Sabor. Todos los derechos reservados.</p>
+        </div>
+    </footer>

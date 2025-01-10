@@ -1,0 +1,74 @@
+/* Existing styles */
+.hidden-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease-out;
+}
+
+.visible-section {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-map] {
+    height: 300px;
+    width: 100%;
+}
+
+/* Animación del menú desplegable */
+.menu-enter {
+    max-height: 0;
+    opacity: 0;
+    transform: scaleY(0.8);
+    transition: all 0.3s ease-in-out;
+}
+
+h1 {
+    font-family: "Gorditas", serif;
+}
+
+.menu-enter-active {
+    max-height: 500px;
+    opacity: 1;
+    transform: scaleY(1);
+    transition: all 0.3s ease-in-out;
+}
+
+.menu-exit {
+    max-height: 500px;
+    opacity: 1;
+    transform: scaleY(1);
+    transition: all 0.3s ease-in-out;
+}
+
+.menu-exit-active {
+    max-height: 0;
+    opacity: 0;
+    transform: scaleY(0.8);
+    transition: all 0.3s ease-in-out;
+}
+
+.order-here {
+    background-color: rgb(153 27 27 / var(--tw-text-opacity, 1));
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px;
+}
+
+.order-here:hover {
+    background-color: rgb(159, 10, 15);
+}
+
+.refran {
+    opacity: .7;
+    font-family: "Playwrite AU SA", serif;
+    font-weight: bolder;
+}
+
+#main-carousel {
+    background-color: rgb(44, 42, 40);
+    border-bottom: 5px solid #642424;
+    margin-bottom: 20px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+

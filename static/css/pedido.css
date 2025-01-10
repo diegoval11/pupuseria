@@ -1,0 +1,73 @@
+/* Animaciones y estilos adicionales */
+.menu-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cart-item {
+    opacity: 0;
+    transform: translateX(20px);
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Estilos para el scrollbar del carrito */
+#cart-items {
+    scrollbar-width: thin;
+    scrollbar-color: #991b1b transparent;
+}
+
+#cart-items::-webkit-scrollbar {
+    width: 6px;
+}
+
+#cart-items::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#cart-items::-webkit-scrollbar-thumb {
+    background-color: #991b1b;
+    border-radius: 3px;
+}
+
+/* Estilos para los botones de cantidad */
+.quantity-btn {
+    transition: all 0.2s ease;
+}
+
+.quantity-btn:hover {
+    transform: scale(1.1);
+}
+
+.quantity-btn:active {
+    transform: scale(0.95);
+}
+
+/* Estilos para el carrito */
+#cart-sidebar {
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Animación para los elementos del menú al cambiar categorías */
+.menu-item {
+    transition: opacity 0.3s ease-out;
+}
+
+.menu-item.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
