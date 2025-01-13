@@ -25,6 +25,7 @@
 
 h1 {
     font-family: "Gorditas", serif;
+    color: #023;
 }
 
 .menu-enter-active {
@@ -61,7 +62,7 @@ h1 {
 
 .refran {
     opacity: .7;
-    font-family: "Playwrite AU SA", serif;
+    font-family: "Gorditas", serif;
     font-weight: bolder;
 }
 

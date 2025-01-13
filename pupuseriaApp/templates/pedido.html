@@ -1,230 +1,206 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="es">
-<head>
-    <title>El Buen Sabor | Realizar Pedido</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&family=Baloo+2&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/pedido.css' %}">
-</head>
 
-<body class="bg-gray-100 font-baloo">
-    <!-- Navbar -->
-    <nav class="w-full bg-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="/" class="flex items-center">
-                <img src="{% static 'images/logo.png' %}" alt="Logo Pupusería" class="w-12 h-12 rounded-full border-2 border-yellow-500">
-            </a>
-            <span class="text-left font-gorditas text-red-800">"El buen sabor está en los ingredientes."</span>
+{% block content %}
+<nav class="w-full bg-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+    
             <div class="flex items-center space-x-4">
-                <a href="#" class="order-here text-white font-bold px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">¡Ordena Aquí!</a>
+                <div class="flex space-x-2">
+                    {% for categoria in categorias %}
+                    <button class="category-tab px-4 py-2 rounded-lg transition-colors {% if forloop.first %}bg-red-800 text-white{% else %}text-gray-600 hover:bg-gray-100{% endif %}" data-category="{{ categoria.id }}">
+                        {{ categoria.nombre }}
+                    </button>
+                    {% endfor %}
+                </div>
                 <button id="cart-button" class="relative">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 004 0z" />
                     </svg>
                     <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
                 </button>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <main class="py-8">
-        <div class="container mx-auto px-4">
-            <h1 class="text-4xl font-gorditas text-red-800 text-center mb-8">Realiza tu Pedido</h1>
+<main class="py-8">
+    <div class="container mx-auto px-4">
+        <h1 class="text-4xl font-gorditas text-red-800 text-center mb-8">Realiza tu Pedido</h1>
 
-            <!-- Tabs -->
-            <div class="flex justify-center mb-8">
-                <div class="bg-white rounded-lg shadow-md p-1">
-                    <button class="category-tab px-6 py-2 rounded-lg transition-colors bg-red-800 text-white" data-category="tipicas">
-                        Pupusas Típicas
-                    </button>
-                    <button class="category-tab px-6 py-2 rounded-lg transition-colors text-gray-600 hover:bg-gray-100" data-category="especiales">
-                        Pupusas Especiales
-                    </button>
-                    <button class="category-tab px-6 py-2 rounded-lg transition-colors text-gray-600 hover:bg-gray-100" data-category="panes">
-                        Panes Rellenos
-                    </button>
-                </div>
-            </div>
-
-            <!-- Menu Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="menu-grid">
-                {% for item in menu_items %}
-                <div class="menu-item bg-white rounded-lg shadow-md overflow-hidden" data-category="{{ item.category }}">
-                    <img src="{% static item.image %}" alt="{{ item.name }}" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">{{ item.name }}</h3>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-red-800">${{ item.price }}</span>
-                            <div class="flex items-center space-x-2">
-                                <button class="quantity-btn decrease bg-gray-200 text-gray-600 px-3 py-1 rounded-lg" data-id="{{ item.id }}">-</button>
-                                <span class="quantity" data-id="{{ item.id }}">0</span>
-                                <button class="quantity-btn increase bg-red-800 text-white px-3 py-1 rounded-lg" data-id="{{ item.id }}">+</button>
-                            </div>
+        <!-- Menu Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="menu-grid">
+            {% for producto in productos %}
+            <div class="menu-item bg-white rounded-lg shadow-md overflow-hidden" data-category="{{ producto.categoria.id }}">
+                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">{{ producto.nombre }}</h3>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold text-red-800">${{ producto.precio }}</span>
+                        <div class="flex items-center space-x-2">
+                            <button class="quantity-btn decrease bg-gray-200 text-gray-600 px-3 py-1 rounded-lg" data-id="{{ producto.id }}">-</button>
+                            <span class="quantity" data-id="{{ producto.id }}">0</span>
+                            <button class="quantity-btn increase bg-red-800 text-white px-3 py-1 rounded-lg" data-id="{{ producto.id }}">+</button>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
+    </div>
 
-        <!-- Cart Sidebar -->
-        <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50">
-            <div class="p-4 h-full flex flex-col">
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50">
+        <div class="p-4 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">Tu Carrito</h2>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="flex-grow overflow-y-auto">
+                <!-- Cart items will be inserted here -->
+            </div>
+
+            <div class="border-t pt-4 mt-4">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold">Tu Carrito</h2>
-                    <button id="close-cart" class="text-gray-500 hover:text-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
+                    <span class="font-bold">Total:</span>
+                    <span id="cart-total" class="font-bold text-xl">$0.00</span>
                 </div>
-                
-                <div id="cart-items" class="flex-grow overflow-y-auto">
-                    <!-- Cart items will be inserted here -->
-                </div>
-
-                <div class="border-t pt-4 mt-4">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="font-bold">Total:</span>
-                        <span id="cart-total" class="font-bold text-xl">$0.00</span>
-                    </div>
-                    <button id="confirm-order" class="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 transition-colors">
-                        Confirmar Pedido
-                    </button>
-                </div>
+                <button id="confirm-order" class="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 transition-colors">
+                    Confirmar Pedido
+                </button>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
-    <script>
-        // Menu data
-        const menuItems = [
-            { id: 1, name: 'Pupusa Revuelta', price: 0.80, category: 'tipicas' },
-            { id: 2, name: 'Pupusa de Queso', price: 0.60, category: 'tipicas' },
-            { id: 3, name: 'Pupusa Chicharrón & Queso', price: 0.90, category: 'tipicas' },
-            { id: 4, name: 'Pupusa de Queso con Loroco', price: 0.80, category: 'especiales' },
-            { id: 5, name: 'Pupusa de Frijol con Queso', price: 0.60, category: 'especiales' },
-            { id: 6, name: 'Pupusa sin nada', price: 0.10, category: 'tipicas' },
-        ];
+<script>
+    // Menu data - Safely parse the Django template data
+    const menuItems = JSON.parse('{{ productos_json|safe }}');
 
-        // Cart state
-        let cart = [];
+    // Cart state
+    let cart = [];
 
-        // DOM Elements
-        const cartButton = document.getElementById('cart-button');
-        const cartSidebar = document.getElementById('cart-sidebar');
-        const closeCart = document.getElementById('close-cart');
-        const cartItems = document.getElementById('cart-items');
-        const cartTotal = document.getElementById('cart-total');
-        const cartCount = document.getElementById('cart-count');
-        const confirmOrder = document.getElementById('confirm-order');
-        const categoryTabs = document.querySelectorAll('.category-tab');
-        const menuGrid = document.getElementById('menu-grid');
+    // DOM Elements
+    const cartButton = document.getElementById('cart-button');
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const closeCart = document.getElementById('close-cart');
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    const cartCount = document.getElementById('cart-count');
+    const confirmOrder = document.getElementById('confirm-order');
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    const menuGrid = document.getElementById('menu-grid');
 
-        // Event Listeners
-        cartButton.addEventListener('click', toggleCart);
-        closeCart.addEventListener('click', toggleCart);
+    // Event Listeners
+    cartButton.addEventListener('click', toggleCart);
+    closeCart.addEventListener('click', toggleCart);
+    
+    categoryTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs
+            categoryTabs.forEach(t => {
+                t.classList.remove('bg-red-800', 'text-white');
+                t.classList.add('text-gray-600');
+            });
+            
+            // Add active class to clicked tab
+            tab.classList.add('bg-red-800', 'text-white');
+            tab.classList.remove('text-gray-600');
+            
+            // Filter menu items
+            const category = tab.dataset.category;
+            filterMenuItems(category);
+        });
+    });
+
+    // Add event listeners for quantity buttons
+    document.querySelectorAll('.quantity-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const itemId = parseInt(btn.dataset.id);
+            const isIncrease = btn.classList.contains('increase');
+            updateQuantity(itemId, isIncrease);
+        });
+    });
+
+    // Functions
+    function toggleCart() {
+        cartSidebar.classList.toggle('translate-x-full');
+    }
+
+    function updateQuantity(itemId, isIncrease) {
+        const quantityElement = document.querySelector(`.quantity[data-id="${itemId}"]`);
+        let quantity = parseInt(quantityElement.textContent);
         
-        categoryTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs
-                categoryTabs.forEach(t => {
-                    t.classList.remove('bg-red-800', 'text-white');
-                    t.classList.add('text-gray-600');
-                });
-                
-                // Add active class to clicked tab
-                tab.classList.add('bg-red-800', 'text-white');
-                tab.classList.remove('text-gray-600');
-                
-                // Filter menu items
-                const category = tab.dataset.category;
-                filterMenuItems(category);
-            });
-        });
-
-        // Add event listeners for quantity buttons
-        document.querySelectorAll('.quantity-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const itemId = parseInt(btn.dataset.id);
-                const isIncrease = btn.classList.contains('increase');
-                updateQuantity(itemId, isIncrease);
-            });
-        });
-
-        // Functions
-        function toggleCart() {
-            cartSidebar.classList.toggle('translate-x-full');
+        if (isIncrease) {
+            quantity++;
+        } else if (quantity > 0) {
+            quantity--;
         }
+        
+        quantityElement.textContent = quantity;
+        updateCart(itemId, quantity);
+    }
 
-        function updateQuantity(itemId, isIncrease) {
-            const quantityElement = document.querySelector(`.quantity[data-id="${itemId}"]`);
-            let quantity = parseInt(quantityElement.textContent);
-            
-            if (isIncrease) {
-                quantity++;
-            } else if (quantity > 0) {
-                quantity--;
+    function updateCart(itemId, quantity) {
+        const item = menuItems.find(item => item.id === itemId);
+        const cartItem = cart.find(i => i.id === itemId);
+
+        if (quantity === 0 && cartItem) {
+            cart = cart.filter(i => i.id !== itemId);
+        } else if (quantity > 0) {
+            if (cartItem) {
+                cartItem.quantity = quantity;
+            } else {
+                cart.push({ ...item, quantity });
             }
-            
-            quantityElement.textContent = quantity;
-            updateCart(itemId, quantity);
         }
 
-        function updateCart(itemId, quantity) {
-            const item = menuItems.find(item => item.id === itemId);
-            const cartItem = cart.find(i => i.id === itemId);
+        updateCartUI();
+    }
 
-            if (quantity === 0 && cartItem) {
-                cart = cart.filter(i => i.id !== itemId);
-            } else if (quantity > 0) {
-                if (cartItem) {
-                    cartItem.quantity = quantity;
-                } else {
-                    cart.push({ ...item, quantity });
-                }
-            }
+    function updateCartUI() {
+        // Update cart count
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
 
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            // Update cart count
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCount.textContent = totalItems;
-
-            // Update cart items
-            cartItems.innerHTML = cart.map(item => `
-                <div class="flex justify-between items-center py-2">
-                    <div>
-                        <h3 class="font-bold">${item.name}</h3>
-                        <p class="text-sm text-gray-600">Cantidad: ${item.quantity}</p>
-                    </div>
-                    <span class="font-bold">$${(item.price * item.quantity).toFixed(2)}</span>
+        // Update cart items
+        cartItems.innerHTML = cart.map(item => `
+            <div class="flex justify-between items-center py-2">
+                <div>
+                    <h3 class="font-bold">${item.name}</h3>
+                    <p class="text-sm text-gray-600">Cantidad: ${item.quantity}</p>
                 </div>
-            `).join('');
+                <span class="font-bold">$${(item.price * item.quantity).toFixed(2)}</span>
+            </div>
+        `).join('');
 
-            // Update total
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            cartTotal.textContent = `$${total.toFixed(2)}`;
-        }
+        // Update total
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotal.textContent = `$${total.toFixed(2)}`;
+    }
 
-        function filterMenuItems(category) {
-            const items = document.querySelectorAll('.menu-item');
-            items.forEach(item => {
-                if (item.dataset.category === category) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-        }
+    function filterMenuItems(categoryId) {
+        const items = document.querySelectorAll('.menu-item');
+        items.forEach(item => {
+            if (item.dataset.category === categoryId) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
+        });
+    }
 
-        // Initialize with first category
-        filterMenuItems('tipicas');
-    </script>
-</body>
-</html>
+    // Initialize with first category
+    filterMenuItems('{{ categorias.first.id }}');
+</script>
+
+<script src="{% static 'dist/pedido.bundle.js' %}"></script>
+
+{% endblock %}
+
